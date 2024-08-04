@@ -26,4 +26,5 @@ clasp deploy 1 "First deployment"
 
 
 ## Add Script Properties
-<img width="872" alt="Screenshot 2024-08-03 at 22 54 50" src="https://github.com/user-attachments/assets/9f701ba9-a599-4d35-81a1-261e132a523f">
+![Screenshot 2024-08-03 at 23 04 29-redacted_dot_app](https://github.com/user-attachments/assets/959d967c-d199-49cb-8ef5-48a185f8ff2f)
+
