@@ -1,4 +1,4 @@
-# daily-coffee-shop-analytics
+# daily-insights-square-api
 
 Square provides comprehensive sales reporting insights. However, it does not offer customized insights for businesses with revenue that varies based on the day of the week. This project addresses that gap by providing business owners with detailed insights into current and historical sales for specific days. Additionally, it sends daily email reports to management.
 
