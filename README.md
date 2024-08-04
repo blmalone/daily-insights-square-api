@@ -4,8 +4,9 @@ Square provides comprehensive sales reporting insights. However, it does not off
 
 ![Screenshot 2024-08-03 at 23 46 12](https://github.com/user-attachments/assets/e01f3690-dfcc-421b-af7a-48d5184618cc)
 
+The project relies on [Google App Script](https://www.google.com/script/start/) for code execution. Additionally, this application makes use of various GSuite APIs including, Gmail, Sheet and PropertyService.
 
-1. Get started: 
+1. Get started with Google App Script: 
 ```
 clasp login # follow browser prompts to login
 
