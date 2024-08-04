@@ -1,30 +1,21 @@
-# coffee-shop-analytics
+# daily-coffee-shop-analytics
 
-Get started: 
+Square provides comprehensive sales reporting insights. However, it does not offer customized insights for businesses with revenue that varies based on the day of the week. This project addresses that gap by providing business owners with detailed insights into current and historical sales for specific days. Additionally, it sends daily email reports to management.
+
+
+1. Get started: 
 ```
 clasp login # follow browser prompts to login
 
-# Do this once
-clasp clone <script_id>
-
-
-# Do this at the start
+# Do this at the start if you made changes in the browser IDE.
 clasp pull
-
 
 # Do this to save
 clasp push
-
-
-# For versioning and deployments
-clasp version "First version"
-
-# Deployment
-clasp deploy 1 "First deployment"
-
 ```
 
 
-## Add Script Properties
+2. Add script properties
 ![Screenshot 2024-08-03 at 23 04 29-redacted_dot_app](https://github.com/user-attachments/assets/959d967c-d199-49cb-8ef5-48a185f8ff2f)
 
+3. Configure the trigger and choose a time to receive the insights email
