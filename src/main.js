@@ -12,7 +12,7 @@ const calculateDailyInsight = async () => {
   console.log(`Totalling income starting from: ${JSON.stringify(startFromDate)}`);
 
   let currentDayToProcess = JSON.parse(JSON.stringify(startFromDate));
-  let numberOfPurchasesPerDay = [];
+  let allNumberOfPurchasesPerDay = [];
   let total = 0;
   let weeks = 0;
   let totals = [];
@@ -33,7 +33,7 @@ const calculateDailyInsight = async () => {
 
   paymentsResults.forEach((payments, index) => {
     const numberOfPayments = payments.length || 0;
-    numberOfPurchasesPerDay.push(numberOfPayments);
+    allNumberOfPurchasesPerDay.push(numberOfPayments);
 
     if (index === paymentsResults.length - 1) {
       todaysPurchases = numberOfPayments;
@@ -48,8 +48,8 @@ const calculateDailyInsight = async () => {
   const oldAverageIncomePerDay = totals.slice(0, -1).reduce((acc, curr) => acc + curr, 0) / (weeks - 1);
   const newAverageIncomePerDay = total / weeks;
 
-  const totalNumberOfPurchases = numberOfPurchasesPerDay.reduce((acc, curr) => acc + curr, 0);
-  const oldAveragePurchasesPerDay = numberOfPurchasesPerDay.slice(0, -1).reduce((acc, curr) => acc + curr, 0) / (weeks - 1);
+  const totalNumberOfPurchases = allNumberOfPurchasesPerDay.reduce((acc, curr) => acc + curr, 0);
+  const oldAveragePurchasesPerDay = allNumberOfPurchasesPerDay.slice(0, -1).reduce((acc, curr) => acc + curr, 0) / (weeks - 1);
   const newAveragePurchasesPerDay = totalNumberOfPurchases / weeks;
 
   const nextDayToProcess = currentDayToProcess.date.toISOString();
@@ -78,11 +78,11 @@ const calculateDailyInsight = async () => {
   const movingAvgDataResults = await Promise.all(movingAvgPromises);
 
   const percentageChangeSinceGenesis = calculatePercentageChange(todaysTotal, oldAverageIncomePerDay);
-  const percentageChangeMessage = formatPercentageChangeMessage(todaysTotal, oldAverageIncomePerDay, percentageChangeSinceGenesis, "average");
+  const percentageChangeMessage = formatSalesPercentageChangeMessage(todaysTotal, oldAverageIncomePerDay, percentageChangeSinceGenesis, "average");
 
   const lastWeeksTotal = totals[totals.length - 2];
   const percentageChangeOnLastWeek = calculatePercentageChange(todaysTotal, lastWeeksTotal);
-  const lastWeeksPercentageChangeMessage = formatPercentageChangeMessage(
+  const lastWeeksPercentageChangeMessage = formatSalesPercentageChangeMessage(
     todaysTotal,
     lastWeeksTotal,
     percentageChangeOnLastWeek,
@@ -122,6 +122,10 @@ const calculateDailyInsight = async () => {
 
     body += `<h2>Weekly Sales Chart</h2><img src="cid:sales_chart" alt="Weekly Sales Chart"/>`;
 
+    const allPurchasesChartInfo = createPurchasesChart(allNumberOfPurchasesPerDay, todaysPurchases, readableDate, "All");
+
+    body += `<h2>Weekly Purchases Chart</h2><img src="cid:purchases_chart" alt="Weekly Purchases Chart"/>`;
+
     console.log(body);
 
     MailApp.sendEmail({
@@ -130,6 +134,7 @@ const calculateDailyInsight = async () => {
       htmlBody: body,
       inlineImages: {
         sales_chart: allChartInfo.chartBlob.setName(allChartInfo.chartFileName),
+        purchases_chart: allPurchasesChartInfo.chartBlob.setName(allPurchasesChartInfo.chartFileName),
         ...movingAvgDataResults.reduce((acc, data, index) => {
           acc[`${index + 1}_week_sales_chart`] = data.chartInfo.chartBlob.setName(data.chartInfo.chartFileName);
           return acc;
@@ -144,9 +149,9 @@ const calculateDailyInsight = async () => {
   }
 };
 
-const createMovingAvgData = (weeks, totalsLatestFirst, todaysTotal, currentDay, readableDate) => {
+const createSalesMovingAvgData = (weeks, totalsLatestFirst, todaysTotal, currentDay, readableDate) => {
   const { movingAverage, totals } = calculateMovingAverage(weeks, totalsLatestFirst);
-  const message = formatPercentageChangeMessage(
+  const message = formatSalesPercentageChangeMessage(
     todaysTotal,
     movingAverage,
     calculatePercentageChange(todaysTotal, movingAverage),
@@ -154,5 +159,18 @@ const createMovingAvgData = (weeks, totalsLatestFirst, todaysTotal, currentDay, 
   );
   const totalsEarliestFirst = [...totals].reverse();
   const chartInfo = createSalesChart(totalsEarliestFirst, currentDay, readableDate, `${weeks} week trend`);
+  return { message, chartInfo };
+};
+
+const createPurchasesMovingAvgData = (weeks, totalsLatestFirst, todaysTotal, currentDay, readableDate) => {
+  const { movingAverage, totals } = calculateMovingAverage(weeks, totalsLatestFirst);
+  const message = formatPurchasesPercentageChangeMessage(
+    todaysTotal,
+    movingAverage,
+    calculatePercentageChange(todaysTotal, movingAverage),
+    `the ${weeks} week moving average`,
+  );
+  const totalsEarliestFirst = [...totals].reverse();
+  const chartInfo = createPurchasesChart(totalsEarliestFirst, currentDay, readableDate, `${weeks} week trend`);
   return { message, chartInfo };
 };
