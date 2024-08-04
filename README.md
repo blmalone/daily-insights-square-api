@@ -22,10 +22,13 @@ This project uses [Google Apps Script](https://www.google.com/script/start/) for
 </br>
 </br>
 
-1. Get started with Google App Script: 
+1. Install [Clasp](https://github.com/google/clasp?tab=readme-ov-file#install)
+
+2. Get started with Google App Script dev workflow:
 
 ```
-clasp login # follow browser prompts to login
+# follow browser prompts to login
+clasp login
 
 # Do this at the start if you made changes in the browser IDE.
 clasp pull
@@ -36,13 +39,13 @@ clasp push
 
 </br>
 </br>
-2. Add script properties
+3. Add script properties
 <div align="center">
 <img width="600" src="https://github.com/user-attachments/assets/959d967c-d199-49cb-8ef5-48a185f8ff2f">
 </div>
 </br>
 </br>
-3. Configure the trigger and choose a time to receive the insights email
+4. Configure the trigger and choose a time to receive the insights email
 <div align="center">
 <img width="600" src="https://github.com/user-attachments/assets/ec77bd74-b744-4220-9787-5c6517374f25">
 </div>
