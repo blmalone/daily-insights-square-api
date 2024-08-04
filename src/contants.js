@@ -19,14 +19,14 @@ let USER_EMAIL_3 = "";
 const getSquareAccessToken = () => {
   if (SQUARE_ACCESS_TOKEN) return SQUARE_ACCESS_TOKEN;
   const scriptProperties = PropertiesService.getScriptProperties();
-  SQUARE_ACCESS_TOKEN = scriptProperties.getProperty('SQUARE_ACCESS_TOKEN');
+  SQUARE_ACCESS_TOKEN = scriptProperties.getProperty("SQUARE_ACCESS_TOKEN");
   return SQUARE_ACCESS_TOKEN;
-}
+};
 
 const getSquareLocationId = () => {
   if (SQUARE_LOCATION_ID) return SQUARE_LOCATION_ID;
   const scriptProperties = PropertiesService.getScriptProperties();
-  SQUARE_LOCATION_ID = scriptProperties.getProperty('SQUARE_LOCATION_ID');
+  SQUARE_LOCATION_ID = scriptProperties.getProperty("SQUARE_LOCATION_ID");
   return SQUARE_LOCATION_ID;
 };
 
@@ -39,8 +39,8 @@ const getUserEmails = () => {
     return { USER_EMAIL_1, USER_EMAIL_2, USER_EMAIL_3 };
   }
   const scriptProperties = PropertiesService.getScriptProperties();
-  USER_EMAIL_1 = scriptProperties.getProperty('USER_EMAIL_1');
-  USER_EMAIL_2 = scriptProperties.getProperty('USER_EMAIL_2');
-  USER_EMAIL_3 = scriptProperties.getProperty('USER_EMAIL_3');
+  USER_EMAIL_1 = scriptProperties.getProperty("USER_EMAIL_1");
+  USER_EMAIL_2 = scriptProperties.getProperty("USER_EMAIL_2");
+  USER_EMAIL_3 = scriptProperties.getProperty("USER_EMAIL_3");
   return { USER_EMAIL_1, USER_EMAIL_2, USER_EMAIL_3 };
 };

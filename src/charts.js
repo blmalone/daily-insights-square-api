@@ -40,9 +40,12 @@ const createSalesChart = (totals, currentDay, readableDate, title) => {
   sheet.insertChart(chart);
 
   const chartBlob = chart.getAs("image/png");
-  return { chartBlob, spreadsheetId: ss.getId(), chartFileName: `${title}_weekly_sales_${readableDate}.png` };
+  return {
+    chartBlob,
+    spreadsheetId: ss.getId(),
+    chartFileName: `${title}_weekly_sales_${readableDate}.png`,
+  };
 };
-
 
 const createPurchasesChart = (totals, currentDay, readableDate, title) => {
   const ss = SpreadsheetApp.create(`Weekly Purchases Chart - ${readableDate} ${title}`);
@@ -82,5 +85,9 @@ const createPurchasesChart = (totals, currentDay, readableDate, title) => {
   sheet.insertChart(chart);
 
   const chartBlob = chart.getAs("image/png");
-  return { chartBlob, spreadsheetId: ss.getId(), chartFileName: `${title}_weekly_purchases_${readableDate}.png` };
+  return {
+    chartBlob,
+    spreadsheetId: ss.getId(),
+    chartFileName: `${title}_weekly_purchases_${readableDate}.png`,
+  };
 };

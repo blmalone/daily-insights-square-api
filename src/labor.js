@@ -20,7 +20,10 @@ const getLaborInformation = async (startOfDay, endOfDay, netDailySpend) => {
       const hourlyRate = shift.wage.hourly_rate.amount / 100;
       const totalPay = Number(hoursWorked) * hourlyRate;
       const laborCost = Number(totalPay.toFixed(2));
-      shifts.push({ fullName: `${firstName} ${lastName}`, totalPay: laborCost });
+      shifts.push({
+        fullName: `${firstName} ${lastName}`,
+        totalPay: laborCost,
+      });
       totalLaborCost += laborCost;
     }
 

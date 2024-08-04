@@ -63,22 +63,27 @@ const calculateDailyInsight = async () => {
   const totalsLatestFirst = [...totals].reverse();
 
   const movingAvgPromises = [
-    createMovingAvgData(2, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(4, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(6, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(8, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(10, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(12, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(14, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(16, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(18, totalsLatestFirst, todaysTotal, currentDay, readableDate),
-    createMovingAvgData(20, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(2, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(4, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(6, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(8, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(10, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(12, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(14, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(16, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(18, totalsLatestFirst, todaysTotal, currentDay, readableDate),
+    createSalesMovingAvgData(20, totalsLatestFirst, todaysTotal, currentDay, readableDate),
   ];
 
   const movingAvgDataResults = await Promise.all(movingAvgPromises);
 
   const percentageChangeSinceGenesis = calculatePercentageChange(todaysTotal, oldAverageIncomePerDay);
-  const percentageChangeMessage = formatSalesPercentageChangeMessage(todaysTotal, oldAverageIncomePerDay, percentageChangeSinceGenesis, "average");
+  const percentageChangeMessage = formatSalesPercentageChangeMessage(
+    todaysTotal,
+    oldAverageIncomePerDay,
+    percentageChangeSinceGenesis,
+    "average",
+  );
 
   const lastWeeksTotal = totals[totals.length - 2];
   const percentageChangeOnLastWeek = calculatePercentageChange(todaysTotal, lastWeeksTotal);
@@ -115,14 +120,18 @@ const calculateDailyInsight = async () => {
       laborInfo.laborCostMessage +
       laborInfo.staffWorkingMessage +
       `<ul><b>Moving Average Performances</b>` +
-      movingAvgDataResults.map((data, index) => `<ul>${data.message}</ul><img src="cid:${index + 1}_week_sales_chart" alt="${index + 1} Week Trend"/>`).join('') +
+      movingAvgDataResults
+        .map((data, index) => `<ul>${data.message}</ul><img src="cid:${index + 1}_week_sales_chart" alt="${index + 1} Week Trend"/>`)
+        .join("") +
       `</ul>`;
 
     const allChartInfo = createSalesChart(totals, currentDay, readableDate, "All");
 
     body += `<h2>Weekly Sales Chart</h2><img src="cid:sales_chart" alt="Weekly Sales Chart"/>`;
 
-    const allPurchasesChartInfo = createPurchasesChart(allNumberOfPurchasesPerDay, todaysPurchases, readableDate, "All");
+    console.log("here bro");
+    console.log(allNumberOfPurchasesPerDay);
+    const allPurchasesChartInfo = createPurchasesChart(allNumberOfPurchasesPerDay, currentDay, readableDate, "All");
 
     body += `<h2>Weekly Purchases Chart</h2><img src="cid:purchases_chart" alt="Weekly Purchases Chart"/>`;
 
@@ -138,12 +147,12 @@ const calculateDailyInsight = async () => {
         ...movingAvgDataResults.reduce((acc, data, index) => {
           acc[`${index + 1}_week_sales_chart`] = data.chartInfo.chartBlob.setName(data.chartInfo.chartFileName);
           return acc;
-        }, {})
+        }, {}),
       },
     });
 
-    const chartIds = [allChartInfo.spreadsheetId, ...movingAvgDataResults.map(data => data.chartInfo.spreadsheetId)];
-    chartIds.forEach(id => DriveApp.getFileById(id).setTrashed(true));
+    const chartIds = [allChartInfo.spreadsheetId, ...movingAvgDataResults.map((data) => data.chartInfo.spreadsheetId)];
+    chartIds.forEach((id) => DriveApp.getFileById(id).setTrashed(true));
   } else {
     console.log("Couldn't send email!");
   }

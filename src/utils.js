@@ -40,11 +40,13 @@ const calculateMovingAverage = (numberOfWeeks, totalsLatestFirst) => {
 const convertToPoundsString = (bigIntNum) => {
   if (!bigIntNum) return ZERO.toLocaleString("en-GB", { style: "currency", currency: "GBP" });
   const totalSalesPennies = parseInt(bigIntNum.toString());
-  const totalSalesPounds = (totalSalesPennies / 100).toLocaleString("en-GB", { style: "currency", currency: "GBP" });
+  const totalSalesPounds = (totalSalesPennies / 100).toLocaleString("en-GB", {
+    style: "currency",
+    currency: "GBP",
+  });
   return totalSalesPounds;
 };
 
 const toInt = (bigint) => {
   return parseInt(bigint.toString());
 };
-

@@ -66,4 +66,3 @@ const getDateMetadata = (date) => {
   const { startOfDay, endOfDay } = resetDateForStartAndEndTimes(date);
   return { startOfDay, endOfDay, date };
 };
-
