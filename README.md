@@ -13,9 +13,15 @@ This project uses [Google Apps Script](https://www.google.com/script/start/) for
 </br>
 </br>
 
-![Screenshot 2024-08-03 at 23 46 12](https://github.com/user-attachments/assets/e01f3690-dfcc-421b-af7a-48d5184618cc)
+<div align="center">
+<img width="600" src="https://github.com/user-attachments/assets/e01f3690-dfcc-421b-af7a-48d5184618cc">
+</div>
+
+</br>
+</br>
 
 1. Get started with Google App Script: 
+
 ```
 clasp login # follow browser prompts to login
 
@@ -26,11 +32,16 @@ clasp pull
 clasp push
 ```
 
-
+</br>
+</br>
 2. Add script properties
-![Screenshot 2024-08-03 at 23 04 29-redacted_dot_app](https://github.com/user-attachments/assets/959d967c-d199-49cb-8ef5-48a185f8ff2f)
-
+<div align="center">
+<img width="600" src="https://github.com/user-attachments/assets/959d967c-d199-49cb-8ef5-48a185f8ff2f">
+</div>
+</br>
+</br>
 3. Configure the trigger and choose a time to receive the insights email
-4. <img width="753" alt="Screenshot 2024-08-03 at 23 26 26" src="https://github.com/user-attachments/assets/ec77bd74-b744-4220-9787-5c6517374f25">
-
+<div align="center">
+<img width="600" src="https://github.com/user-attachments/assets/ec77bd74-b744-4220-9787-5c6517374f25">
+</div>
 
