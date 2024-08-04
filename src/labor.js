@@ -14,8 +14,10 @@ const getLaborInformation = async (startOfDay, endOfDay, netDailySpend) => {
       const teamMember = await getTeamMemberByID(shift.employee_id);
       const firstName = teamMember.team_member.given_name;
       const lastName = teamMember.team_member.family_name;
-      let clockedInAt = new Date(shift.created_at);
-      let clockedOutAt = new Date(shift.updated_at);
+      console.log(teamMember);
+      console.log(shift);
+      let clockedInAt = new Date(shift.start_at);
+      let clockedOutAt = new Date(shift.end_at);
       const hoursWorked = ((clockedOutAt.getTime() - clockedInAt.getTime()) / (1000 * 60 * 60)).toFixed(2);
       const hourlyRate = shift.wage.hourly_rate.amount / 100;
       const totalPay = Number(hoursWorked) * hourlyRate;
