@@ -9,7 +9,7 @@
 </br>
 Square provides comprehensive sales reporting insights. However, it does not offer customized insights for businesses with revenue that varies based on the day of the week. This project addresses that gap by providing business owners with detailed insights into current and historical sales for specific days. Additionally, it sends daily email reports to management.
 
-</br></br>
+</br>
 
 This project uses [Google Apps Script](https://www.google.com/script/start/) for code execution. Additionally, it leverages various GSuite APIs, including Gmail (_sending daily insight email_), Sheets (_constructing graphs for daily insight email_), and PropertyService (_storing sensitive data_). The project also relies on the Square API to retrieve crucial data for historical and daily sales, labor, and other key metrics.
 </br>
