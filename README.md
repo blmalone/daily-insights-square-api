@@ -33,7 +33,7 @@ clasp login
 # Do this at the start if you made changes in the browser IDE.
 clasp pull
 
-# Do this to save
+# Do this to deploy
 clasp push
 ```
 
