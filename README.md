@@ -19,3 +19,4 @@ clasp push
 ![Screenshot 2024-08-03 at 23 04 29-redacted_dot_app](https://github.com/user-attachments/assets/959d967c-d199-49cb-8ef5-48a185f8ff2f)
 
 3. Configure the trigger and choose a time to receive the insights email
+4. <img width="753" alt="Screenshot 2024-08-03 at 23 26 26" src="https://github.com/user-attachments/assets/ec77bd74-b744-4220-9787-5c6517374f25">
